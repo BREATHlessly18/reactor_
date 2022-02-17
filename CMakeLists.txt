@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAG ${CMAKE_CXX_FLAG} "-g -Wall")
 
-# macro
+# -D
 
 # -L
 
@@ -25,14 +25,5 @@ add_executable(reactor_server
 
 # -l
 set(LIB_NAME 
-    # avcodec 
-    # avdevice 
-    # avfilter 
-    # avformat 
-    # avutil 
-    # postproc 
-    # swresample 
-    # swscale 
-    # x264 
     pthread)
 target_link_libraries(reactor_server ${LIB_NAME})
