@@ -1,8 +1,10 @@
+#include <thread>
 #include <tuple>
 
 #include "assert.h"
 #include "server.hh"
 #include "timer.hh"
+
 #include "utils/json.hh"
 
 auto netInfo(nlohmann::json const &json) {
@@ -23,11 +25,14 @@ auto main() -> int {
   Server server{port, ip.data(), std::addressof(eventloop)};
   server.start();
 
-  Timer timer(5, hello, std::addressof(eventloop));
-  timer.go();
+  // Timer timer(5, hello, std::addressof(eventloop));
+  // timer.go();
 
-  eventloop.runAfter(20, [&] { eventloop.quit(); });
+  // eventloop.runAfter(20, [&] { eventloop.quit(); });
 
+  std::thread t([&] { eventloop.runAfter(10, [&] { eventloop.quit(); }); });
+  t.join();
+  
   eventloop.loop();
 
   return 0;
